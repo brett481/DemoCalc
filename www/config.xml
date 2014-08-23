@@ -3,7 +3,7 @@
         xmlns:gap   = "http://phonegap.com/ns/1.0"
         id          = "com.myconcreteapp.demo"
         versionCode = "10" 
-        version     = "1.0.0" >
+        version     = "1.0.1" >
 
     <!-- versionCode is optional and Android only -->
 
@@ -18,7 +18,7 @@
     </author>
     
     <!-- Define app icon for each platform. -->
-    <icon src="icon.png" />
+<!--    <icon src="icon.png" />-->
     <icon src="pics/icon_android-36.png"   gap:platform="android"    gap:qualifier="ldpi" />
     <icon src="pics/icon_android-48.png"   gap:platform="android"    gap:qualifier="mdpi" />
     <icon src="pics/icon_android-72.png"   gap:platform="android"    gap:qualifier="hdpi" />

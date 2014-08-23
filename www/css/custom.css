@@ -7,7 +7,7 @@
 */
 /*Header*/
 .custom-header {
-        padding: 0;
+        padding: 5px;
         background: #364049;
         height: 90px;
 }
@@ -20,18 +20,18 @@
         width:100%;
 }
 .home_text {
-    width: 300px;
+    width: 280px;
     margin: auto;
     padding: 20px;
 }
 .home_text h3 {
         width: 100%;
         margin: auto;
-        padding: 20px 0 0 0;
+        padding: 0px 0 0 0;
 }
 @media all and (max-width:400px) {
     .home_text {
-    width: 300px;
+    width: 280px;
     padding-top: 15px;
     padding-bottom: 10px;
 }
