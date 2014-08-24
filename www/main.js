@@ -376,17 +376,17 @@ function calculate_evap(){
 if (theResult > 0.2)
      {
      $('#evapcalculator_result').html(theResult+' lbs/sq-ft/hr - Plastic shrinkage cracking is likely to occur.');
-     document.getElementById("evappic").src = "http://myconcreteapp.com/pics/slab2.png";
+     document.getElementById("evappic").src = "pics/slab2.png";
      }
      else 
         if (theResult > 0.093) 
         {
           $('#evapcalculator_result').html(theResult+' lbs/sq-ft/hr - Plastic shrinkage cracking may occur.');
-          document.getElementById("evappic").src = "http://myconcreteapp.com/pics/slab1.png";
+          document.getElementById("evappic").src = "pics/slab1.png";
         }
         else 
         {
            $('#evapcalculator_result').html(theResult+' lbs/sq-ft/hr');
-           document.getElementById("evappic").src = "http://myconcreteapp.com/pics/slab.png";
+           document.getElementById("evappic").src = "pics/slab.png";
         }
 }
