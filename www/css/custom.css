@@ -7,14 +7,14 @@
 */
 /*Header*/
 .custom-header {
-        padding: 0;
-        background: #364049;
-        height: 90px;
+        padding: 5px;
+        background: #354C8E;
+        height: 80px;
 }
 /* Header logo_image */
 .logo_container {
         max-width: 410px;
-        margin: 25px auto;
+        margin: 10px auto;
 }
 .logo_image {
         width:100%;
