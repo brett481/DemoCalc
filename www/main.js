@@ -62,6 +62,56 @@ function number_verify(input, id){
 
 }
 
+// Closure
+(function(){
+
+	/**
+	 * Decimal adjustment of a number.
+	 *
+	 * @param	{String}	type	The type of adjustment.
+	 * @param	{Number}	value	The number.
+	 * @param	{Integer}	exp		The exponent (the 10 logarithm of the adjustment base).
+	 * @returns	{Number}			The adjusted value.
+	 */
+	function decimalAdjust(type, value, exp) {
+		// If the exp is undefined or zero...
+		if (typeof exp === 'undefined' || +exp === 0) {
+			return Math[type](value);
+		}
+		value = +value;
+		exp = +exp;
+		// If the value is not a number or the exp is not an integer...
+		if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+			return NaN;
+		}
+		// Shift
+		value = value.toString().split('e');
+		value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+		// Shift back
+		value = value.toString().split('e');
+		return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+	}
+
+	// Decimal round
+	if (!Math.round10) {
+		Math.round10 = function(value, exp) {
+			return decimalAdjust('round', value, exp);
+		};
+	}
+	// Decimal floor
+	if (!Math.floor10) {
+		Math.floor10 = function(value, exp) {
+			return decimalAdjust('floor', value, exp);
+		};
+	}
+	// Decimal ceil
+	if (!Math.ceil10) {
+		Math.ceil10 = function(value, exp) {
+			return decimalAdjust('ceil', value, exp);
+		};
+	}
+
+})();
 
 function calculate_square(){
 	 var squareHeight = $('#squareHeight').val();
@@ -75,9 +125,10 @@ function calculate_square(){
 	squareWidth =  returnUnitInYards(squareWidth, squareWidthUnit);
 	squareDepth =  returnUnitInYards(squareDepth, squareDepthUnit);
      	var answer = squareHeight*squareWidth*squareDepth;
+            var answerwaste = (squareHeight*squareWidth*squareDepth)*1.1
 	     var theResult = (answer).toFixed(2);
-	 
-	$('#calcsquare_result').html('You will need&nbsp&nbsp'+theResult+' yd<sup>3</sup>');
+	       var theResultwaste = Math.round(answerwaste*2)/2;
+	$('#calcsquare_result').html('The exact quantity is&nbsp&nbsp'+theResult+' yd<sup>3</sup><br><br>Due to waste & spillage,<br> consider ordering&nbsp'+theResultwaste+' yd<sup>3</sup>');
 }
 
 function calculate_triangle(){
@@ -90,13 +141,12 @@ function calculate_triangle(){
    triangleHeight = returnUnitInYards(triangleHeight, triangleHeightUnit);
         triangleWidth = returnUnitInYards(triangleWidth, triangleWidthUnit);
         triangleDepth = returnUnitInYards(triangleDepth, triangleDepthUnit);
-
-      
         
    var answer = (triangleHeight * triangleWidth * triangleDepth) / 2;
-      var theResult = (answer).toFixed(2);
-	$('#calctriangle_result').html('You will need&nbsp&nbsp'+theResult+' yd<sup>3</sup>');
-	
+        var answerwaste = ((triangleHeight * triangleWidth * triangleDepth) / 2) * 1.1;
+    var theResult = (answer).toFixed(2);
+	   var theResultwaste = Math.round(answerwaste*2)/2;
+    $('#calctriangle_result').html('The exact quantity is&nbsp&nbsp'+theResult+' yd<sup>3</sup><br><br>Due to waste & spillage,<br> consider ordering&nbsp'+theResultwaste+' yd<sup>3</sup>');
 }
  
 function calculate_slope(){
@@ -116,8 +166,10 @@ function calculate_slope(){
     slopeDense =  returnUnitInYards(slopeDense, slopeDepthUnit);
      
 	var answer = (slopeDepth + slopeDense) / 2 * slopeWidth * slopeHeight;
-      var theResult = (answer).toFixed(2);
-	$('#calcslope_result').html('You will need&nbsp&nbsp'+theResult+' yd<sup>3</sup>');
+        var answerwaste = ((slopeDepth + slopeDense) / 2 * slopeWidth * slopeHeight) * 1.1;
+    var theResult = (answer).toFixed(2);
+	   var theResultwaste = Math.round(answerwaste*2)/2;    
+    $('#calcslope_result').html('The exact quantity is&nbsp&nbsp'+theResult+' yd<sup>3</sup><br><br>Due to waste & spillage,<br> consider ordering&nbsp'+theResultwaste+' yd<sup>3</sup>');
 }
    
 function calculate_circle() {
@@ -129,12 +181,12 @@ function calculate_circle() {
 	
 	circleHeight =  returnUnitInYards(circleHeight, circleHeightUnit); 
 	circleWidth =  returnUnitInYards(circleWidth, circleWidthUnit);
-
-     
 	
 	var answer = circleHeight * circleHeight * circleWidth * 3.14285714285714;
-      var theResult = (answer).toFixed(2);
-	$('#calccircle_result').html('You will need&nbsp&nbsp'+theResult+' yd<sup>3</sup>');
+        var answerwaste = (circleHeight * circleHeight * circleWidth * 3.14285714285714) * 1.1;
+    var theResult = (answer).toFixed(2);
+       var theResultwaste = Math.round(answerwaste*2)/2;    
+    $('#calccircle_result').html('The exact quantity is&nbsp&nbsp'+theResult+' yd<sup>3</sup><br><br>Due to waste & spillage,<br> consider ordering&nbsp'+theResultwaste+' yd<sup>3</sup>');
 }
         
 function calculate_tube(){
@@ -152,10 +204,10 @@ function calculate_tube(){
        
 		
 	  var answer = 3.14285714285714 * tubeDepth * ((tubeOutside * tubeOutside) - (tubeInside * tubeInside));
+        var answerwaste = (3.14285714285714 * tubeDepth * ((tubeOutside * tubeOutside) - (tubeInside * tubeInside))) * 1.1;
       var theResult = (answer).toFixed(2);
-	 
-	$('#calctube_result').html('You will need&nbsp&nbsp'+theResult+' yd<sup>3</sup>');	
-	
+	      var theResultwaste = Math.round(answerwaste*2)/2;
+	$('#calctube_result').html('The exact quantity is&nbsp&nbsp'+theResult+' yd<sup>3</sup><br><br>Due to waste & spillage,<br> consider ordering&nbsp'+theResultwaste+' yd<sup>3</sup>');
 }
    
 function calculate_block(){
@@ -376,17 +428,17 @@ function calculate_evap(){
 if (theResult > 0.2)
      {
      $('#evapcalculator_result').html(theResult+' lbs/sq-ft/hr - Plastic shrinkage cracking is likely to occur.');
-     document.getElementById("evappic").src = "http://myconcreteapp.com/pics/slab2.png";
+     document.getElementById("evappic").src = "pics/slab2.png";
      }
      else 
         if (theResult > 0.093) 
         {
           $('#evapcalculator_result').html(theResult+' lbs/sq-ft/hr - Plastic shrinkage cracking may occur.');
-          document.getElementById("evappic").src = "http://myconcreteapp.com/pics/slab1.png";
+          document.getElementById("evappic").src = "pics/slab1.png";
         }
         else 
         {
            $('#evapcalculator_result').html(theResult+' lbs/sq-ft/hr');
-           document.getElementById("evappic").src = "http://myconcreteapp.com/pics/slab.png";
+           document.getElementById("evappic").src = "pics/slab.png";
         }
 }

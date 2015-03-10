@@ -8,8 +8,13 @@
 /*Header*/
 .custom-header {
         padding: 5px;
+<<<<<<< HEAD
         background: #354C8E;
         height: 80px;
+=======
+        background: #364049;
+        height: 90px;
+>>>>>>> origin/master
 }
 /* Header logo_image */
 .logo_container {
@@ -20,20 +25,20 @@
         width:100%;
 }
 .home_text {
-    width: 300px;
+    width: 280px;
     margin: auto;
-    padding: 20px;
+    padding: 40px 20px 20px 20px;
 }
 .home_text h3 {
         width: 100%;
         margin: auto;
-        padding: 20px 0 0 0;
+        padding: 0px 0 0 0;
 }
 @media all and (max-width:400px) {
     .home_text {
-    width: 300px;
-    padding-top: 15px;
-    padding-bottom: 10px;
+/*    width: 100%;*/
+    padding-top: 25px;
+    padding-bottom: 0px;
 }
     .home_text h3 {
         width: 100%;
